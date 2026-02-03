@@ -13,7 +13,7 @@ import mtg_handler
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 intents = Intents.all()
-client = discord_commands.Bot(command_prefix='!', intents=intents)
+client = discord_commands.Bot(command_prefix='!', intents=intents, case_insensitive=False)
 commands = client.tree
 
 
@@ -30,7 +30,16 @@ async def on_ready():
         print(f"Synched {len(synched)} command(s)")
     except Exception as e:
         print(f"Failed in on_ready: {e}")
-
+        
+@client.hybrid_command(name="sync", description="Sync Commands")
+async def sync(ctx):
+    """Sync the bot's commands with Discord."""
+    try:
+        synched = await commands.sync()
+        await ctx.send(f"Synched {len(synched)} command(s)")
+    except Exception as e:
+        print(f"Sync command error: {e}")
+        await ctx.send("⚠️ An error has occurred.")
 # ============================================================================
 # MTG COMMANDS
 # ============================================================================
