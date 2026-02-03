@@ -17,13 +17,13 @@ jobs:
 
     - name: Pull latest repo
       run: |
-        cd /Users/redki/discord_bot_mokey
+        cd C:\Users\redki\discord_bot_mokey
         git pull
         echo "Repo pulled"
 
     - name: Start bot
       run: |
-        cd /Users/redki/discord_bot_mokey
+        cd C:\Users\redki\discord_bot_mokey
         source venv/bin/activate
         nohup python3 main.py > bot.log 2>&1 &
         disown
