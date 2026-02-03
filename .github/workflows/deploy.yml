@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Stop running bot
       run: |
-        pkill -f "python3 main.py" || true
+        taskkill /F /IM python.exe || echo "Bot stopped"
         echo "Old bot killed"
 
     - name: Pull latest repo
@@ -20,11 +20,13 @@ jobs:
         cd C:/Users/redki/discord_bot_mokey
         git pull
         echo "Repo pulled"
+        call venv\Scripts\activate.bat
+        pip install -r requirements.txt
+        echo "Dependencies installed"
 
     - name: Start bot
       run: |
         cd C:/Users/redki/discord_bot_mokey
-        source venv/bin/activate
-        nohup python3 main.py > bot.log 2>&1 &
-        disown
+        call venv\Scripts\activate.bat
+        start /B python main.py > bot.log 2>&1
         echo "Bot started"

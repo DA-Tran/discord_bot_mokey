@@ -7,7 +7,7 @@ from discord.ext import commands as discord_commands
 from dotenv import load_dotenv
 
 import mcserver_handler
-import music_handler
+
 import mtg_handler
 
 load_dotenv()
@@ -64,59 +64,59 @@ async def leave(ctx):
 # MUSIC COMMANDS
 # ============================================================================
 
-@commands.command(name="skip", description="Skip Current Song")
-async def next(message):
-    """Skip the currently playing song and play the next one in queue."""
-    try:
-        await message.response.send_message("⏭️ Skipping Current Song...")
-        voice_client = discord.utils.get(message.client.voice_clients, guild=message.guild)
-        if voice_client and voice_client.is_playing():
-            voice_client.stop()
-    except Exception as e:
-        print(e)
-        await message.channel.send("⚠️ An error has occurred.")
+# @commands.command(name="skip", description="Skip Current Song")
+# async def next(message):
+#     """Skip the currently playing song and play the next one in queue."""
+#     try:
+#         await message.response.send_message("⏭️ Skipping Current Song...")
+#         voice_client = discord.utils.get(message.client.voice_clients, guild=message.guild)
+#         if voice_client and voice_client.is_playing():
+#             voice_client.stop()
+#     except Exception as e:
+#         print(e)
+#         await message.channel.send("⚠️ An error has occurred.")
 
-@commands.command(name="play", description="Play Music from Spotify or Youtube")
-@app_commands.describe(link="Youtube, Spotify, or a Search Query")
-async def play(message, link: str):
-    """Play a song or playlist from YouTube, Spotify, or search query."""
-    try:
-        await message.response.send_message("Queuing Up...")
-        await music_handler.play(message, link)
-    except Exception as e:
-        print(e)
-        await message.channel.send("⚠️ An error has occurred.")
+# @commands.command(name="play", description="Play Music from Spotify or Youtube")
+# @app_commands.describe(link="Youtube, Spotify, or a Search Query")
+# async def play(message, link: str):
+#     """Play a song or playlist from YouTube, Spotify, or search query."""
+#     try:
+#         await message.response.send_message("Queuing Up...")
+#         await music_handler.play(message, link)
+#     except Exception as e:
+#         print(e)
+#         await message.channel.send("⚠️ An error has occurred.")
 
-@commands.command(name="pause", description="Pause Current Song")
-async def pause(message):
-    """Pause the currently playing song."""
-    try:
-        await message.response.send_message("Paused ⏸︎")
-        await music_handler.pause(message)
-    except Exception as e:
-        print(e)
-        await message.channel.send("⚠️ An error has occurred.")
+# @commands.command(name="pause", description="Pause Current Song")
+# async def pause(message):
+#     """Pause the currently playing song."""
+#     try:
+#         await message.response.send_message("Paused ⏸︎")
+#         await music_handler.pause(message)
+#     except Exception as e:
+#         print(e)
+#         await message.channel.send("⚠️ An error has occurred.")
 
-@commands.command(name="stop", description="Stops the current queue and clears it")
-async def stop(message):
-    """Stop music playback and clear the entire queue."""
-    try:
-        await message.response.send_message("Clearing Queue...")
-        await music_handler.clear_queue(message)
-        await message.channel.send("Music Stopped and Queue Cleared")
-    except Exception as e:
-        print(e)
-        await message.channel.send("⚠️ An error has occurred.")
+# @commands.command(name="stop", description="Stops the current queue and clears it")
+# async def stop(message):
+#     """Stop music playback and clear the entire queue."""
+#     try:
+#         await message.response.send_message("Clearing Queue...")
+#         await music_handler.clear_queue(message)
+#         await message.channel.send("Music Stopped and Queue Cleared")
+#     except Exception as e:
+#         print(e)
+#         await message.channel.send("⚠️ An error has occurred.")
 
-@commands.command(name="queue", description="Lists all songs in queue")
-async def queue(message):
-    """Display all songs currently in the music queue."""
-    try:
-        await message.response.send_message("Fetching Queue...")
-        await music_handler.show_queue(message)
-    except Exception as e:
-        print(e)
-        await message.channel.send("⚠️ An error has occurred.")
+# @commands.command(name="queue", description="Lists all songs in queue")
+# async def queue(message):
+#     """Display all songs currently in the music queue."""
+#     try:
+#         await message.response.send_message("Fetching Queue...")
+#         await music_handler.show_queue(message)
+#     except Exception as e:
+#         print(e)
+#         await message.channel.send("⚠️ An error has occurred.")
 
 # ============================================================================
 # MINECRAFT SERVER COMMANDS
